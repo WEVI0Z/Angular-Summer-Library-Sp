@@ -11,6 +11,7 @@ import {Router} from "@angular/router";
 })
 export class LoginComponent {
   form!: FormGroup;
+  incorrect: boolean = false;
 
   constructor(private userService: UserService, private router: Router) {
   }
@@ -30,11 +31,16 @@ export class LoginComponent {
     const user: User = {
       login: this.form.value["login"],
       password: this.form.value["password"],
+      role: "user",
       balance: 0,
     }
 
-    if(this.userService.login(user)) {
-      this.router.navigate(["/user/info"]);
-    }
+    this.userService.login(user).subscribe(user => {
+      if (user) {
+        this.router.navigate(["/user/info"]);
+      } else {
+        this.incorrect = true;
+      }
+    });
   }
 }

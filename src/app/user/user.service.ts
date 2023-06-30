@@ -1,21 +1,63 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {User} from "../shared/interface/user";
-import {Router} from "@angular/router";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {map, Observable, switchMap} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
+  url: string = "https://localhost:7281";
   user: User | null = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")!) : null;
 
-  constructor(private router: Router) { }
+  httpOptions = {
+    headers: new HttpHeaders({"Content-Type": "application/json"}),
+  };
 
-  login(user: User): User {
-    this.user = user;
+  constructor(private http: HttpClient) {
+  }
 
-    localStorage.setItem("user", JSON.stringify(user));
+  login(user: User): Observable<User | null> {
+    return this.http.get<User[]>(this.url + "/user", {...this.httpOptions, responseType: "json"}).pipe(
+      map(users => {
+        let target: User | null = null;
 
-    return this.user;
+        users.forEach(item => {
+          if (item.login === user.login && item.password === user.password) {
+            this.user = user;
+
+            localStorage.setItem("user", JSON.stringify(user));
+
+            target = this.user;
+          }
+        })
+
+        return target;
+      })
+    )
+  }
+
+  register(user: User): Observable<User | null> {
+    return this.http.get<User[]>(this.url + "/user", {...this.httpOptions, responseType: "json"}).pipe(
+      map(users => {
+        let check: boolean = false;
+
+        users.forEach(item => {
+          if (item.login === user.login) {
+            check = true;
+          }
+        })
+
+        return check ? null : user;
+      }),
+      switchMap(item => {
+        if (item) {
+          return this.http.post<User>(this.url + "/user", user, {...this.httpOptions, responseType: "json"});
+        }
+
+        return new Observable<null>().pipe(map(() => null));
+      })
+    )
   }
 
   logout(): null {

@@ -4,6 +4,9 @@
   <section class="register">
     <form method="post" class="register__form form" [formGroup]="form" (ngSubmit)="submit()">
       <h2 class="register__slogan">Авторизация</h2>
+      <p class="form__validation" *ngIf="incorrect">
+        Неправильный логин или пароль
+      </p>
       <label for="login" class="form__label">
         <input
           formControlName="login"
