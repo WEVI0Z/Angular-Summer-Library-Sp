@@ -1,9 +1,9 @@
 <div class="card">
-  <h3 class="card__name">{{bookName}}</h3>
-  <p class="card__category">{{category}}</p>
+  <h3 class="card__name">{{book.name}}</h3>
+  <p class="card__category">{{book.category}}</p>
   <div class="card__info">
     <p class="card__description">
-      {{description}}
+      {{book.description}}
     </p>
     <svg width="60" height="60" viewBox="0 0 50 51" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path d="M28.4221 24.2904C28.5686 24.5834 28.8616 24.7421 29.1668 24.7421C29.2889 24.7421 29.4232 24.7177 29.5453 24.6567C29.5941 24.6323 34.5021 22.1417 36.9194 21.3725C37.3589 21.2382 37.6031 20.7621 37.4566 20.3226C37.3223 19.883 36.8583 19.6389 36.4066 19.7732C33.855 20.5789 28.9837 23.0573 28.7761 23.155C28.3855 23.387 28.2145 23.8875 28.4221 24.2904Z" fill="#00093C"/>
@@ -20,7 +20,7 @@
     </svg>
   </div>
   <div class="card__buy">
-    <p class="card__cost">{{cost}}$</p>
-    <a href="" class="card__link button">Купить</a>
+    <p class="card__cost">{{book.cost}}$</p>
+    <a href="../../../assets/pdfs/{{book.link}}" class="card__link button">Купить</a>
   </div>
 </div>

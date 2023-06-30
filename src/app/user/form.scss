@@ -1,0 +1,30 @@
+@import "../../styles";
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: $min-width;
+  margin: auto;
+
+  &__label {
+    margin-bottom: 20px;
+  }
+
+  &__input {
+    color: $dark-blue;
+    font-size: 18px;
+
+    background: none;
+    border: none;
+    border-bottom: 1px solid $dark-blue;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &__submit {
+    font-size: 18px;
+  }
+}

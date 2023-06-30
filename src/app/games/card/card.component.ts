@@ -1,5 +1,4 @@
 import {Component, Input} from '@angular/core';
-import {Book} from "../../shared/interface/book";
 
 @Component({
   selector: 'app-card',
@@ -7,5 +6,8 @@ import {Book} from "../../shared/interface/book";
   styleUrls: ['./card.component.scss']
 })
 export class CardComponent {
-  @Input() book!: Book;
+  @Input() bookName!: string;
+  @Input() cost!: number;
+  @Input() description!: string;
+  @Input() link!: string;
 }

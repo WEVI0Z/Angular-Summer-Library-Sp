@@ -1,0 +1,31 @@
+<main>
+  <app-header></app-header>
+  <body>
+  <section class="register">
+    <form method="post" class="register__form form" [formGroup]="form" (ngSubmit)="submit()">
+      <h2 class="register__slogan">Авторизация</h2>
+      <label for="login" class="form__label">
+        <input
+          formControlName="login"
+          type="text"
+          name="login"
+          id="login"
+          class="form__input"
+          placeholder="Логин..."
+        >
+      </label>
+      <label for="password" class="form__label">
+        <input
+          formControlName="password"
+          type="password"
+          name="login"
+          id="password"
+          class="form__input"
+          placeholder="Пароль..."
+        >
+      </label>
+      <button type="submit" class="form__submit button" [disabled]="form.invalid">Войти в аккаунт</button>
+    </form>
+  </section>
+  </body>
+</main>
