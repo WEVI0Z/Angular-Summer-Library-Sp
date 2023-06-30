@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {User} from "../../shared/interface/user";
+import {UserService} from "../user.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -8,6 +11,9 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 })
 export class LoginComponent {
   form!: FormGroup;
+
+  constructor(private userService: UserService, private router: Router) {
+  }
 
   ngOnInit(): void {
     this.form = new FormGroup<any>({
@@ -21,9 +27,14 @@ export class LoginComponent {
   }
 
   submit() {
-    const user = {
+    const user: User = {
       login: this.form.value["login"],
       password: this.form.value["password"],
+      balance: 0,
+    }
+
+    if(this.userService.login(user)) {
+      this.router.navigate(["/user/info"]);
     }
   }
 }

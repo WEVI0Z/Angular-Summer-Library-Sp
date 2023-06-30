@@ -1,0 +1,21 @@
+@import "../../../styles";
+
+.info {
+  max-width: $min-width;
+  display: flex;
+  margin: auto;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+
+  &__name {
+    margin: 0;
+
+    font-weight: 400;
+    font-size: 24px;
+  }
+
+  &__balance {
+    margin: 2px 0 10px 0;
+  }
+}

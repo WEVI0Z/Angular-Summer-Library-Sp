@@ -39,8 +39,11 @@ a {
   display: block;
   position: relative;
   padding: 5px 10px;
-  background: #fff;
+  background-color: #fff;
   border-radius: 6px;
+  border: none;
+  font-size: 16px;
+  font-family: Montserrat, sans-serif, monospace;
 
   &::before {
     content: "";
@@ -57,9 +60,11 @@ a {
 
   &:hover::before, &:focus::before {
     filter: blur(10px);
+    z-index: -2
   }
 
   &:active::before {
     opacity: 0;
+    z-index: -2
   }
 }
