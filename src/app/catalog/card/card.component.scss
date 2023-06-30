@@ -1,0 +1,39 @@
+@import "../../../styles";
+
+.card {
+  padding: 27px;
+  width: 320px;
+
+  border-radius: 15px;
+  background-color: #C7EEFF;
+
+  &__name {
+    margin: 0;
+    font-size: 26px;
+  }
+
+  &__category {
+    margin: 5px 0;
+  }
+
+  &__info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__description {
+    width: 280px;
+  }
+
+  &__buy {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__cost {
+    margin: 10px 0;
+    font-weight: 700;
+  }
+}

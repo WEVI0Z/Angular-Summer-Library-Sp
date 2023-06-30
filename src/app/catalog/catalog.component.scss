@@ -1,0 +1,26 @@
+@import "../../styles";
+
+.catalog {
+  max-width: $max-width;
+  min-width: $min-width;
+  display: flex;
+  margin: auto;
+  padding: $paddings;
+  flex-direction: column;
+
+  &__name {
+    font-size: 32px;
+  }
+
+  &__list {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  &__item {
+    margin-bottom: 30px;
+  }
+}

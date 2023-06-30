@@ -1,0 +1,18 @@
+@import "../../styles";
+
+.intro {
+  min-height: 250px;
+  background-image: url("../../assets/main-pattern.jpg");
+  background-size: 50px;
+
+  &__slogan {
+    display: block;
+    width: 400px;
+    margin: 0 auto;
+    padding-top: 50px;
+
+    color: #fff;
+    font-size: 40px;
+    text-align: center;
+  }
+}
