@@ -1,8 +1,59 @@
+@import "variables";
+
 body {
   margin: 0;
   padding: 0;
 
   font-family: Montserrat, sans-serif, monospace;
+  color: $dark-blue;
 }
 
+a {
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+  color: $dark-blue;
+  transition: all 0.2s ease-out;
 
+  &::before {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 0;
+    bottom: 0;
+
+    border-bottom: 1px solid $dark-blue;
+    transition: all 0.2s ease-out;
+  }
+
+  &:hover::before, &:focus::before {
+    width: 100%;
+  }
+
+  &:active {
+    transform: translateY(1px);
+  }
+}
+
+.button {
+  padding: 5px 10px;
+  background: #fff;
+  border-radius: 6px;
+
+  &::before {
+    content: "";
+    position: absolute;
+    z-index: -2;
+    inset: 1px;
+    width: 100%;
+
+    transform: translateY(2px);
+    background: linear-gradient(70deg, #F7941D, #27AAE1);
+    filter: blur(5px);
+    transition: all 0.2s ease-out;
+  }
+
+  &:hover::before, &:focus::before {
+    filter: blur(10px);
+  }
+}

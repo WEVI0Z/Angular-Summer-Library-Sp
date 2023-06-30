@@ -1,0 +1,58 @@
+@import "../../../styles";
+
+.header {
+  width: 100%;
+
+  border-bottom: 1px solid $dark-blue;
+
+  &__inner {
+    max-width: 1200px;
+    min-width: 400px;
+    display: flex;
+    flex-wrap: wrap;
+    min-height: 60px;
+    margin: auto;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  &__logo a {
+    &:hover::before, &:focus::before {
+      width: 0;
+    }
+
+    &:hover, &:focus {
+      transform: translateY(-2px);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+
+  &__links {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  &__link {
+    margin-left: 20px;
+
+    a {
+      font-size: 18px;
+    }
+  }
+
+  &__buttons {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  &__button {
+    margin-left: 20px;
+  }
+}
