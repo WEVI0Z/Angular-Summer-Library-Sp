@@ -1,0 +1,19 @@
+<main>
+  <app-header></app-header>
+  <body>
+  <section class="library">
+    <h2 class="library__name">Купленные книги:</h2>
+    <ul class="library__list" *ngIf="books.length > 0; else empty">
+      <li class="library__item" *ngFor="let book of books">
+        <app-card
+          [book]="book"
+          [user]="user"
+        ></app-card>
+      </li>
+    </ul>
+    <ng-template #empty>
+      <p class="library__message">На данный момент больше доступных книг нет</p>
+    </ng-template>
+  </section>
+  </body>
+</main>

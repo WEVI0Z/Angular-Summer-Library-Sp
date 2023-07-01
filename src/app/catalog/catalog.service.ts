@@ -56,4 +56,43 @@ export class CatalogService {
       })
     )
   }
+
+  getFavouriteBooks(): Observable<Book[]> {
+    return this.http.get<BookLink[]>(this.url + "/favourite", {...this.httpOptions, responseType: "json"}).pipe(
+      map(bookLinks => {
+        const books: Book[] = [];
+        bookLinks.forEach(bookLink => {
+          if (bookLink.userId == this.userService.user!.login) {
+            books.push(this.exampleBooks[bookLink.bookId - 1]);
+          }
+        })
+
+        return books;
+      })
+    )
+  }
+
+  add(book: Book): Observable<BookLink | null> {
+      const body: BookLink = {
+        userId: this.userService.user!.login,
+        bookId: book.id
+      }
+
+      return this.http.post<BookLink>(this.url + "/favourite", body, {...this.httpOptions, responseType: "json"})
+  }
+
+  remove(book: Book): Observable<BookLink | null> {
+    return this.http.get<BookLink[]>(this.url + "/favourite", {...this.httpOptions, responseType: "json"}).pipe(
+      switchMap(bookLinks => {
+        let targetBook: BookLink | null = null;
+        bookLinks.forEach(bookLink => {
+          if (bookLink.userId == this.userService.user!.login && bookLink.bookId == book.id) {
+            targetBook = bookLink;
+          }
+        })
+
+        return this.http.delete<BookLink>(this.url + "/favourite/" + targetBook!.id, {...this.httpOptions, responseType: "json"});
+      })
+    )
+  }
 }

@@ -4,10 +4,11 @@
   <section class="catalog">
     <h2 class="catalog__name">Каталог доступных книг:</h2>
     <ul class="catalog__list" *ngIf="books.length > 0; else empty">
-      <li class="catalog__item" *ngFor="let book of books">
+      <li class="catalog__item" *ngFor="let book of books; let i = index">
         <app-card
           [book]="book"
           [user]="user"
+          [favourite]="favourites[i]"
         ></app-card>
       </li>
     </ul>

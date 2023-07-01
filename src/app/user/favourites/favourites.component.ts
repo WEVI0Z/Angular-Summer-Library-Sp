@@ -1,16 +1,15 @@
-import {Component, OnInit} from '@angular/core';
+import { Component } from '@angular/core';
 import {Book} from "../../shared/interface/book";
 import {User} from "../../shared/interface/user";
 import {UserService} from "../user.service";
 import {CatalogService} from "../../catalog/catalog.service";
-import {books} from "../../shared/mock/books";
 
 @Component({
-  selector: 'app-library',
-  templateUrl: './library.component.html',
-  styleUrls: ['./library.component.scss']
+  selector: 'app-favourites',
+  templateUrl: './favourites.component.html',
+  styleUrls: ['./favourites.component.scss']
 })
-export class LibraryComponent implements OnInit{
+export class FavouritesComponent {
   books: Book[] = [];
   user: User | null = this.userService.user;
 
@@ -22,7 +21,7 @@ export class LibraryComponent implements OnInit{
 
   ngOnInit() {
     if (this.user) {
-      this.catalogService.getUserBooks().subscribe(books => {
+      this.catalogService.getFavouriteBooks().subscribe(books => {
         this.books = books;
       });
     }

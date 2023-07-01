@@ -21,6 +21,10 @@ const routes: Routes = [
     path: "library",
     loadChildren: () => import("./library/library.module").then(m => m.LibraryModule),
   },
+  {
+    path: "favourites",
+    loadChildren: () => import("./favourites/favourites.module").then(m => m.FavouritesModule),
+  },
 ];
 
 @NgModule({

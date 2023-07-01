@@ -16,10 +16,9 @@
   </div>
   <div class="card__buy">
     <a
-      routerLink="./"
+      (click)="play()"
       *ngIf="user;else unauth"
       class="card__link button"
-      (click)="play()"
     >Играть</a>
     <ng-template #unauth>
       <p class="card__message">Для взаимодействия, авторизуйтесь</p>

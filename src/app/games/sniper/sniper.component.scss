@@ -1,0 +1,22 @@
+@import "../../../styles";
+
+.sniper {
+  max-width: $max-width;
+  min-width: $min-width;
+  display: flex;
+  margin: auto;
+  padding: $paddings;
+  flex-direction: column;
+
+  &__name {
+    font-size: 32px;
+  }
+
+  &__field {
+    max-width: $max-width;
+    min-width: $min-width;
+    height: 500px;
+    border: 1px solid black;
+    border-radius: 12px;
+  }
+}
