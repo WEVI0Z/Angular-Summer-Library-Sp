@@ -34,6 +34,6 @@ export class CardComponent {
   }
 
   remove() {
-    this.catalogService.add(this.book).subscribe(() => this.favourite = false);
+    this.catalogService.remove(this.book).subscribe(() => this.favourite = false);
   }
 }

@@ -1,0 +1,35 @@
+<main>
+  <app-header></app-header>
+  <body>
+  <section class="page">
+    <h2 class="page__name">{{book ? book.name : "Загрузка..."}}</h2>
+    <p class="page__description">{{book ? book.description : "Загрузка описания..."}}</p>
+    <div class="page__actions" *ngIf="user">
+      <button
+        (click)="buy()"
+        *ngIf="!owned"
+        class="page__link button"
+      >Купить</button>
+
+      <a
+        *ngIf="owned"
+        class="page__link button"
+        href="../../assets/pdfs/{{book!.link}}"
+      >Купить</a>
+
+      <button
+        (click)="add()"
+        *ngIf="!favourite"
+        class="page__link button"
+      >Нравится</button>
+
+      <button
+        (click)="remove()"
+        *ngIf="favourite"
+        class="page__link button"
+      >Не нравится</button>
+    </div>
+    <ng-template #unauth class="page__message">Для взаимодействия авторизуйтесь</ng-template>
+  </section>
+  </body>
+</main>
