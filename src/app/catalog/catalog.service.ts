@@ -48,7 +48,7 @@ export class CatalogService {
         const books: Book[] = [];
         bookLinks.forEach(bookLink => {
           if (bookLink.userId == this.userService.user!.login) {
-            books.push(this.exampleBooks[bookLink.bookId]);
+            books.push(this.exampleBooks[bookLink.bookId - 1]);
           }
         })
 

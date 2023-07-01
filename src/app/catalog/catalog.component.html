@@ -3,7 +3,7 @@
   <body>
   <section class="catalog">
     <h2 class="catalog__name">Каталог доступных книг:</h2>
-    <ul class="catalog__list">
+    <ul class="catalog__list" *ngIf="books.length > 0; else empty">
       <li class="catalog__item" *ngFor="let book of books">
         <app-card
           [book]="book"
@@ -11,6 +11,9 @@
         ></app-card>
       </li>
     </ul>
+    <ng-template #empty>
+      <p class="catalog__message">На данный момент больше доступных книг нет</p>
+    </ng-template>
   </section>
   </body>
 </main>

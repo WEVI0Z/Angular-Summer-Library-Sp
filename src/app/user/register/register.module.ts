@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import {RouterModule, Routes} from "@angular/router";
 import {RegisterComponent} from "./register.component";
 import {SharedModule} from "../../shared/shared.module";
@@ -15,14 +15,15 @@ const routes: Routes = [{
   declarations: [
     RegisterComponent
   ],
-    imports: [
-        CommonModule,
-        RouterModule.forChild(routes),
-        SharedModule,
-        ReactiveFormsModule
-    ],
+  imports: [
+    CommonModule,
+    RouterModule.forChild(routes),
+    SharedModule,
+    ReactiveFormsModule
+  ],
   exports: [
     RouterModule
   ]
 })
-export class RegisterModule { }
+export class RegisterModule {
+}
