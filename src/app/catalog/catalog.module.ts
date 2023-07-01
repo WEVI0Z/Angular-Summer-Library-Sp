@@ -22,8 +22,9 @@ const routes: Routes = [{
     RouterModule.forChild(routes),
     SharedModule,
   ],
-  exports: [
-    RouterModule
-  ]
+    exports: [
+        RouterModule,
+        CardComponent
+    ]
 })
 export class CatalogModule { }

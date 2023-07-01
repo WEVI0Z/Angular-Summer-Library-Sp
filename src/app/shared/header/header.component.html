@@ -26,7 +26,7 @@
         </a>
       </li>
       <li class="header__link"><a routerLink="/games">Игры</a></li>
-      <li class="header__link"><a routerLink="/user/library">Библиотека</a></li>
+      <li class="header__link" *ngIf="user"><a routerLink="/user/library">Библиотека</a></li>
     </ul>
     <ul class="header__buttons">
       <li class="header__button" *ngIf="!user"><button class="button" routerLink="/user/login">Войти</button></li>

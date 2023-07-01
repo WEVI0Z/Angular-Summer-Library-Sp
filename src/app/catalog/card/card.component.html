@@ -21,6 +21,9 @@
   </div>
   <div class="card__buy">
     <p class="card__cost">{{book.cost}}$</p>
-    <a href="../../../assets/pdfs/{{book.link}}" class="card__link button">Купить</a>
+    <button *ngIf="user; else unauth" (click)="buy()" class="card__link button">Купить</button>
+    <ng-template #unauth>
+      <p class="card__message">Для взаимодействия, авторизуйтесь</p>
+    </ng-template>
   </div>
 </div>

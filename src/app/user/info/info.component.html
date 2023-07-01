@@ -8,7 +8,7 @@
     </svg>
     <div class="info__data">
       <h3 class="info__name">Логин: {{user.login}}</h3>
-      <p class="info__balance">Баланс: {{user.balance}}$</p>
+      <p class="info__balance">Баланс: {{user.balance}}$ <span class="info__error" *ngIf="error"> - На балансе не хватает средств!</span></p>
       <button class="info__button button" (click)="logout()">Выйти</button>
     </div>
   </section>

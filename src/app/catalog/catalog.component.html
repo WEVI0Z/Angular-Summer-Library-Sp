@@ -7,6 +7,7 @@
       <li class="catalog__item" *ngFor="let book of books">
         <app-card
           [book]="book"
+          [user]="user"
         ></app-card>
       </li>
     </ul>

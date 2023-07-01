@@ -15,6 +15,14 @@
     </svg>
   </div>
   <div class="card__buy">
-    <a routerLink="" class="card__link button">Играть</a>
+    <a
+      routerLink="./"
+      *ngIf="user;else unauth"
+      class="card__link button"
+      (click)="play()"
+    >Играть</a>
+    <ng-template #unauth>
+      <p class="card__message">Для взаимодействия, авторизуйтесь</p>
+    </ng-template>
   </div>
 </div>

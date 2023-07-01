@@ -24,9 +24,9 @@ export class UserService {
 
         users.forEach(item => {
           if (item.login === user.login && item.password === user.password) {
-            this.user = user;
+            this.user = item;
 
-            localStorage.setItem("user", JSON.stringify(user));
+            localStorage.setItem("user", JSON.stringify(item));
 
             target = this.user;
           }
