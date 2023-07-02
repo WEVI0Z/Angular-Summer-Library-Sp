@@ -56,6 +56,20 @@
       </div>
       <button class="button" (click)="rate()">Отправить</button>
     </div>
+    <div class="page__reviews">
+      <h3>Отзывы:</h3>
+      <p class="page__error" *ngIf="badReview">
+        Отзыв пустой или содержит некорректные выражения
+      </p>
+      <textarea name="review" id="reviews" cols="30" rows="10" placeholder="Напишите свой отзыв..."></textarea>
+      <button class="button" (click)="sendReview()">Отправить отзыв</button>
+      <div class="page__review" *ngFor="let review of reviews">
+        <h4>{{review.userId}}</h4>
+        <p class="page__review__description">
+          {{review.text}}
+        </p>
+      </div>
+    </div>
     <ng-template #unauth class="page__message">Для взаимодействия авторизуйтесь</ng-template>
   </section>
   </body>

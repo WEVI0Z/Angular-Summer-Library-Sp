@@ -7,21 +7,24 @@ import {books} from "../shared/mock/books";
 import {User} from "../shared/interface/user";
 import {map, Observable, switchMap, tap} from "rxjs";
 import {PageService} from "./page.service";
-import {mark} from "@angular/compiler-cli/src/ngtsc/perf/src/clock";
-import {Rate} from "../shared/interface/rate";
+import {Review} from "../shared/interface/review";
+
+const FILTER: string[] = ["черт", "блин", "ничтожно"]
 
 @Component({
   selector: 'app-page',
   templateUrl: './page.component.html',
   styleUrls: ['./page.component.scss']
 })
-export class PageComponent implements OnInit{
+export class PageComponent implements OnInit {
   public book?: Book;
   public user: User | null = this.userService.user;
   public favourite: boolean = false;
   public owned: boolean = false;
   public rated: boolean = false;
   public mark: number = 0;
+  public reviews: Review[] = [];
+  public badReview: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -56,7 +59,13 @@ export class PageComponent implements OnInit{
                   })
 
                   this.mark = tempMark / rates.length;
-                })
+                }),
+                switchMap(() => this.pageService.getBookReviews(this.book!).pipe(
+                    tap(reviews => {
+                      this.reviews = reviews;
+                    })
+                  )
+                )
               ))
             );
           })
@@ -118,6 +127,25 @@ export class PageComponent implements OnInit{
         this.rated = true;
         this.calcRate();
       });
+    }
+  }
+
+  sendReview() {
+    const review: HTMLInputElement = document.querySelector(".page__reviews textarea")!;
+    this.badReview = false;
+
+    let text: string | undefined = review.value;
+
+    FILTER.forEach(item => {
+      if (text?.includes(item)) {
+        this.badReview = true;
+      }
+    })
+
+    if (text && !this.badReview) {
+      this.pageService.sendReview(this.book!, text).subscribe(review => {
+        this.reviews.push(review);
+      })
     }
   }
 }

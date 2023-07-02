@@ -5,6 +5,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {UserService} from "../user/user.service";
 import {map, Observable} from "rxjs";
 import {Rate} from "../shared/interface/rate";
+import {Review} from "../shared/interface/review";
 
 @Injectable({
   providedIn: 'root'
@@ -32,9 +33,27 @@ export class PageService {
     const rate: Rate = {
       bookId: book.id,
       userId: this.userService.user!.login,
-      mark: mark
+      mark
     }
 
     return this.http.post<Rate>(this.url + "/rate", rate, {...this.httpOptions, responseType: "json"});
+  }
+
+  sendReview(book: Book, text: string): Observable<Review> {
+    const review: Review = {
+      bookId: book.id,
+      userId: this.userService.user!.login,
+      text
+    }
+
+    return this.http.post<Review>(this.url + "/review", review, {...this.httpOptions, responseType: "json"});
+  }
+
+  getBookReviews(book: Book): Observable<Review[]> {
+    return  this.http.get<Review[]>(this.url + "/review", {...this.httpOptions, responseType: "json"}).pipe(
+      map(reviews => {
+        return reviews.filter(review => review.bookId === book.id);
+      })
+    );
   }
 }

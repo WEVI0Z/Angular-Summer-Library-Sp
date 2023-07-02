@@ -32,11 +32,37 @@
     display: flex;
     width: 200px;
     justify-content: space-between;
+
     label {
       display: flex;
       flex-direction: column-reverse;
       align-items: center;
+    }
+  }
 
+  &__reviews {
+    display: flex;
+    flex-direction: column;
+    width: 380px;
+
+    .button {
+      margin-top: 20px;
+    }
+  }
+
+  &__review {
+    border: 1px solid $dark-blue;
+    border-radius: 13px;
+    padding: 5px;
+    margin: 10px 0;
+
+    h4 {
+      margin: 0;
+      font-size: 22px;
+    }
+
+    p {
+      margin: 0;
     }
   }
 }
