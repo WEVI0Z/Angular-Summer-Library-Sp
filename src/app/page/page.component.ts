@@ -5,7 +5,10 @@ import {CatalogService} from "../catalog/catalog.service";
 import {Book} from "../shared/interface/book";
 import {books} from "../shared/mock/books";
 import {User} from "../shared/interface/user";
-import {switchMap} from "rxjs";
+import {map, Observable, switchMap, tap} from "rxjs";
+import {PageService} from "./page.service";
+import {mark} from "@angular/compiler-cli/src/ngtsc/perf/src/clock";
+import {Rate} from "../shared/interface/rate";
 
 @Component({
   selector: 'app-page',
@@ -17,29 +20,49 @@ export class PageComponent implements OnInit{
   public user: User | null = this.userService.user;
   public favourite: boolean = false;
   public owned: boolean = false;
+  public rated: boolean = false;
+  public mark: number = 0;
 
   constructor(
     private route: ActivatedRoute,
     private userService: UserService,
     private catalogService: CatalogService,
-    private router: Router
+    private router: Router,
+    private pageService: PageService,
   ) {
   }
 
   ngOnInit() {
     this.route.params.pipe(
       switchMap(params => {
-        this.book = books[params["id"]];
+        this.book = books[params["id"] - 1];
 
         return this.catalogService.getUserBooks().pipe(
           switchMap(books => {
-            this.owned = books.includes(this.book!)
+            this.owned = books.includes(this.book!);
 
-            return this.catalogService.getFavouriteBooks();
+            return this.catalogService.getFavouriteBooks().pipe(
+              tap(books => this.favourite = books.includes(this.book!)),
+              switchMap(() => this.pageService.getBookRates(this.book!).pipe(
+                tap(rates => {
+                  let tempMark: number = 0;
+
+                  rates.forEach(rate => {
+                    if (rate.userId === this.user!.login || !this.user) {
+                      this.rated = true
+                    }
+
+                    tempMark += rate.mark;
+                  })
+
+                  this.mark = tempMark / rates.length;
+                })
+              ))
+            );
           })
         );
       })
-    ).subscribe(books => this.favourite = books.includes(this.book!));
+    ).subscribe();
   }
 
   add() {
@@ -59,5 +82,42 @@ export class PageComponent implements OnInit{
 
       this.router.navigate(["/user/info"], {queryParams: {error: "На счете не хватает средств"}});
     });
+  }
+
+  calcRate() {
+    this.pageService.getBookRates(this.book!).pipe(
+      tap(rates => {
+        let tempMark: number = 0;
+
+        rates.forEach(rate => {
+          if (rate.userId === this.user!.login || !this.user) {
+            this.rated = true
+          }
+
+          tempMark += rate.mark;
+        })
+
+        this.mark = tempMark / rates.length;
+      })
+    ).subscribe();
+  }
+
+  rate() {
+    const inputs: NodeListOf<HTMLInputElement> = document.querySelectorAll(".page__rate input");
+
+    let mark: number | undefined;
+
+    inputs.forEach(input => {
+      if (input.checked) {
+        mark = +input.value;
+      }
+    })
+
+    if (mark) {
+      this.pageService.sendRate(this.book!, mark).subscribe(rate => {
+        this.rated = true;
+        this.calcRate();
+      });
+    }
   }
 }

@@ -3,6 +3,7 @@
   <body>
   <section class="page">
     <h2 class="page__name">{{book ? book.name : "Загрузка..."}}</h2>
+    <p class="page__rated" *ngIf="mark > 0">Оценка пользователей: {{mark}}</p>
     <p class="page__description">{{book ? book.description : "Загрузка описания..."}}</p>
     <div class="page__actions" *ngIf="user">
       <button
@@ -15,7 +16,7 @@
         *ngIf="owned"
         class="page__link button"
         href="../../assets/pdfs/{{book!.link}}"
-      >Купить</a>
+      >Открыть</a>
 
       <button
         (click)="add()"
@@ -28,6 +29,32 @@
         *ngIf="favourite"
         class="page__link button"
       >Не нравится</button>
+    </div>
+    <div class="page__mark" *ngIf="!rated">
+      <h3>Оцените книгу</h3>
+      <div class="page__rate">
+        <label for="rate--1">
+          1
+          <input type="radio" name="rate" value="1" id="rate--1">
+        </label>
+        <label for="rate--2">
+          2
+          <input type="radio" name="rate" value="2" id="rate--2">
+        </label>
+        <label for="rate--3">
+          3
+          <input type="radio" name="rate" value="3" id="rate--3">
+        </label>
+        <label for="rate--4">
+          4
+          <input type="radio" name="rate" value="4" id="rate--4">
+        </label>
+        <label for="rate--5">
+          5
+          <input type="radio" name="rate" value="5" id="rate--5">
+        </label>
+      </div>
+      <button class="button" (click)="rate()">Отправить</button>
     </div>
     <ng-template #unauth class="page__message">Для взаимодействия авторизуйтесь</ng-template>
   </section>

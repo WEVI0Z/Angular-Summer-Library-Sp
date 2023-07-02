@@ -2,7 +2,7 @@
   <app-header></app-header>
   <body>
   <section class="library">
-    <h2 class="library__name">Купленные книги:</h2>
+    <h2 class="library__name">Понравившиеся книги:</h2>
     <ul class="library__list" *ngIf="books.length > 0; else empty">
       <li class="library__item" *ngFor="let book of books">
         <app-card
@@ -12,7 +12,7 @@
       </li>
     </ul>
     <ng-template #empty>
-      <p class="library__message">На данный момент больше доступных книг нет</p>
+      <p class="library__message">У вас пока что нет понравившихся книг</p>
     </ng-template>
   </section>
   </body>

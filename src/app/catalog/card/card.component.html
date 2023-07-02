@@ -21,7 +21,7 @@
   </div>
   <div class="card__buy">
     <p class="card__cost">{{book.cost}}$</p>
-    <button *ngIf="user; else unauth" (click)="buy()" class="card__link button">Купить</button>
+    <button *ngIf="user; else unauth" routerLink="/page/{{book.id}}" class="card__link button">Открыть</button>
     <button *ngIf="user && !favourite" (click)="add()" class="card__link button">Нравится</button>
     <button *ngIf="user && favourite" (click)="remove()" class="card__link button">Не нравится</button>
     <ng-template #unauth>

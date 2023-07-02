@@ -12,4 +12,31 @@
     display: flex;
     justify-content: space-around;
   }
+
+  &__mark {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    h3 {
+      text-align: center;
+    }
+
+    .button {
+      margin: 20px auto;
+    }
+  }
+
+  &__rate {
+    margin-top: 10px;
+    display: flex;
+    width: 200px;
+    justify-content: space-between;
+    label {
+      display: flex;
+      flex-direction: column-reverse;
+      align-items: center;
+
+    }
+  }
 }
