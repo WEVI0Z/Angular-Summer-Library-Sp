@@ -3,7 +3,10 @@
   <body>
   <section class="sniper">
     <h2 class="sniper__name">Игра Снайпер</h2>
+    <p class="sniper__score">очки: {{score}}</p>
     <div #field class="sniper__field"></div>
+
+    <button class="button" (click)="finish()">Закончить</button>
   </section>
   </body>
 </main>
